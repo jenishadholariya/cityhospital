@@ -70,9 +70,8 @@ function Auth(props) {
                                             <div className="col-md-4 form-group">
                                                 <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur}/>
                                                 <div className="validate" />
-                                                <p>{errors.name && touched.name ? errors.name :''}</p>   
-                                                                                            
-                   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++                         </div>
+                                                <p>{errors.name && touched.name ? errors.name :''}</p>                                                    
+                                       </div>
                                 }
 
                             </div>
