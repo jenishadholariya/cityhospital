@@ -10,7 +10,7 @@ function Appointment(props) {
         phone: yup.number().required().positive().integer(),
         email: yup.string().email().required("Enter your email"),
         message: yup.string().required("Enter your message"),
-        select:yup.string().required("select your Department"),
+        department:yup.string().required("select your Department"),
         date: yup.date().required("Enter Appointment date"),
     });
 
@@ -20,7 +20,7 @@ function Appointment(props) {
             phone: '',
             email: '',
             message:'',
-            select:'',
+            department:'',
             date:''
         },
 
@@ -31,7 +31,7 @@ function Appointment(props) {
         },
       });
 
-      const { handleChange ,errors, handleSubmit ,handleBlur ,touched }=formik;
+      const { handleChange ,errors, handleSubmit , handleBlur , touched }=formik;
 
     return (
         <main id="main">
@@ -44,16 +44,16 @@ function Appointment(props) {
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                     </div>
                     <Formik values={formik}>
-                        <Form action className="php-email-form" onSubmit={handleSubmit}>
+                        <Form className="php-email-form" onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-md-4 form-group">
-                                    <input type="text" name=" name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur}/>
+                                    <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur}/>
                                     <p className="text-danger">{errors.name && touched.name ? errors.name:''}</p>
                                     <div className="validate" />
                                 </div>
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
                                     <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" onChange={handleChange} onBlur={handleBlur}/>
-                                    <p className="text-danger">{errors.email && touched.email ?errors.email:''}</p>
+                                    <p className="text-danger">{errors.email && touched.email ? errors.email:''}</p>
                                     <div className="validate" />
                                 </div>
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
@@ -68,8 +68,8 @@ function Appointment(props) {
                                     <p className="text-danger">{errors.date && touched.date ? errors.date:''}</p>
                                     <div className="validate" />
                                 </div>
-                                <div className="col-md-4 form-group mt-3 onChange={handleChange} onBlur={handleBlur}">
-                                    <select name="department" id="department" className="form-select" >
+                                <div className="col-md-4 form-group mt-3 ">
+                                    <select name="department" id="department" className="form-select" onChange={handleChange} onBlur={handleBlur}>
                                         <option value>Select Department</option>
                                         <option value="Department 1">Department 1</option>
                                         <option value="Department 2">Department 2</option>

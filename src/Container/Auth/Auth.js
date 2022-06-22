@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { Formik , Form , useFormik } from 'formik';
+import { Formik , Form , useFormik, insert } from 'formik';
 
 function Auth(props) {
     const [user, setUser] = useState('login');
@@ -11,7 +11,7 @@ function Auth(props) {
     if(user === "login"){
         schemaobj={
             email: yup.string().required("Enter your valid email").email("Enter your email"),
-            password: yup.string().required("Enter your password"),
+            password: yup.string().required("Enter your current password"),
         }
         initail= {
             email: '',
@@ -21,7 +21,7 @@ function Auth(props) {
         schemaobj={
             name: yup.string().required("Enter your name"),
             email: yup.string().required("Enter your valid email").email("Enter your email"),
-            password: yup.string().required("Enter your password"),
+            password: yup.string().required("Enter your current password"),
         }
         initail= {
             name:'',
@@ -32,13 +32,25 @@ function Auth(props) {
 
     const schema = yup.object().shape(schemaobj);
 
+    const insertData=(values)=>{
+        let LocalData=JSON.parse(localStorage.getItem("user"));
+        console.log(values);
+
+        if(LocalData === null){
+            localStorage.setItem("user",JSON.stringify([values]));
+        }else{
+            LocalData.setItem("user",JSON.stringify(LocalData));
+        }
+    }
+
     const formikObj = useFormik({   
         initialValues:initail,
 
         validationSchema : schema,
 
         onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
+            insertData(values);
+            alert(JSON.stringify(values, null, 2));
         },
     });
 
@@ -59,7 +71,7 @@ function Auth(props) {
                         }
                     </div>
                     <Formik values={formikObj}>
-                        <Form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
+                        <Form method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
                             <div className="row">
                                 {
                                     reset ?
@@ -88,10 +100,10 @@ function Auth(props) {
                                         null
                                         :
                                         <div className="col-md-4 form-group mt-3 mt-md-0">
-                                            <input type="password" className="form-control" name="password" id="password" placeholder="Your password" />
-                                            <div className="validate" onChange={handleChange} onBlur={handleBlur}/>
-                                            <div className="validate" />
+                                            <input type="password" className="form-control" name="password" id="password" placeholder="Your password" onChange={handleChange} onBlur={handleBlur}/>
                                             <p>{errors.password && errors.password ? errors.password :''}</p>
+                                            <div className="validate" />
+                                            
                                         </div>
                                 }
                             </div>
