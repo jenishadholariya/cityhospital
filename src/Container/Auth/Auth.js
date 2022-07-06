@@ -34,7 +34,7 @@ function Auth(props) {
 
     const insertData=(values)=>{
         let LocalData=JSON.parse(localStorage.getItem("user"));
-        console.log(values);
+        // console.log(values);
 
         if(LocalData === null){
             localStorage.setItem("user",JSON.stringify([values]));
@@ -50,11 +50,11 @@ function Auth(props) {
 
         onSubmit: values => {
             insertData(values);
-            alert(JSON.stringify(values, null, 2));
+
         },
     });
 
-    const { handleChange, errors, handleSubmit, handleBlur, touched } = formikObj;
+    const { handleChange, errors, handleSubmit, handleBlur, touched ,handleReset } = formikObj;
 
     return (
         <section id="appointment" className="appointment">
@@ -71,7 +71,7 @@ function Auth(props) {
                         }
                     </div>
                     <Formik values={formikObj}>
-                        <Form method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
+                        <Form method="post" role="form" className="php-email-form" onSubmit={handleSubmit} onReset={handleReset}>
                             <div className="row">
                                 {
                                     reset ?
@@ -138,6 +138,7 @@ function Auth(props) {
                                 <button type='submit'>Signup</button>
                                 }
                             </div>
+                            <button type='reset'>reset</button>
                         </Form>
                     </Formik>
                 </div>

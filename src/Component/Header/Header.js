@@ -40,7 +40,8 @@ function Header(props) {
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
-                    <NavLink href="./pages/appointment.html" className="appointment-btn scrollto" to={"/Appointment"}><span className="d-none d-md-inline">Make an</span>
+                    <NavLink className="appointment-btn scrollto" to="/Bookappointment">
+                        <span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
                     <NavLink href="#" className="appointment-btn scrollto" to={"/Auth"}>
                         <span className="d-none d-md-inline">Login/ Signup</span>
